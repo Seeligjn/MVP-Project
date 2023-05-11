@@ -1,0 +1,1 @@
+INSERT INTO test (item_name , due_date) VALUES ('create wireframe' , '05-11-2023');
