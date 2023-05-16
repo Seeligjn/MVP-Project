@@ -1,8 +1,10 @@
-DROP TABLE IF EXISTS test;
+DROP TABLE IF EXISTS contacts;
 
-CREATE TABLE test (
+CREATE TABLE contacts (
     id SERIAL PRIMARY KEY ,
-    item_name TEXT ,
-    due_date DATE
+    first_name TEXT ,
+    last_name TEXT ,
+    phone_number VARCHAR(10) ,
+    address TEXT 
 );
 
