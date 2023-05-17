@@ -6,21 +6,13 @@ function displayContacts() {
     console.log(contacts);
     for (let contact in contacts) {
       let $span = $("span");
+      //create new div for each contact in DB
       let $contactInfo = $("<div>")
         .addClass("contact-info")
         .text(
-          contacts[contact].id +
-            " | " +
-            contacts[contact].first_name +
-            " " +
-            contacts[contact].last_name +
-            " | " +
-            contacts[contact].phone_number +
-            " | " +
-            contacts[contact].address
+          `${contacts[contact].id} || ${contacts[contact].first_name} ${contacts[contact].last_name} ${contacts[contact].phone_number} ${contacts[contact].address}`
         );
-      let $icon = $("<i>").addClass("fa fa-user fa-lg");
-
+      //add delete button for each contact with event listener which tags each button with the id of the div its attached to -----> see deleteContact function below
       let $deleteButton = $("<button>")
         .addClass("btn btn-danger btn-sm")
         .text("Delete")
@@ -28,7 +20,7 @@ function displayContacts() {
         .on("click", function () {
           deleteContact($(this).data("contactId"));
         });
-
+      let $icon = $("<i>").addClass("fa fa-user fa-lg");
       let $deleteButtonDiv = $("<div>").addClass("button-div");
       $deleteButtonDiv.append($deleteButton);
       $contactInfo.prepend($icon);
@@ -39,7 +31,7 @@ function displayContacts() {
 }
 
 //submit a new contact using POST method
-//showing the input container to enter in desired contact info
+//show the input container to enter in desired contact info
 let $newContact = $("#new-contact");
 $newContact.on("click", function () {
   $(".input-container").show();
@@ -49,6 +41,7 @@ $newContact.on("click", function () {
 });
 
 $("#submit-contact").on("click", function () {
+  //create contact object to use as the value for data in the post request
   let contact = {
     first_name: $("#first-name").val(),
     last_name: $("#last-name").val(),
@@ -73,19 +66,13 @@ $("#submit-contact").on("click", function () {
     success: function (newContact) {
       console.log(newContact);
       let $span = $("span");
+      //create a new div for the new contact when submitted and adding the fields that were given.
       let $contactInfo = $("<div>")
         .addClass("contact-info")
         .text(
-          newContact[0].id +
-            " | " +
-            newContact[0].first_name +
-            " " +
-            newContact[0].last_name +
-            " | " +
-            newContact[0].phone_number +
-            " | " +
-            newContact[0].address
+          `${newContact[0].id} || ${newContact[0].first_name} ${newContact[0].last_name} ${newContact[0].phone_number} ${newContact[0].address}`
         );
+      //add delete button using the same method as the display function delete button
       let $deleteButton = $("<button>")
         .addClass("btn btn-danger btn-sm")
         .text("Delete")
@@ -93,8 +80,10 @@ $("#submit-contact").on("click", function () {
         .on("click", function () {
           deleteContact($(this).data("contactId"));
         });
+      let $icon = $("<i>").addClass("fa fa-user fa-lg");
       let $deleteButtonDiv = $("<div>").addClass("button-div");
       $deleteButtonDiv.append($deleteButton);
+      $contactInfo.prepend($icon);
       $contactInfo.append($deleteButtonDiv);
       $span.append($contactInfo);
       $(".input-container").hide();
@@ -103,6 +92,7 @@ $("#submit-contact").on("click", function () {
   });
 });
 
+//select edit button and hide/show required items from input container div
 let $editButton = $("#edit");
 $editButton.on("click", function () {
   $(".input-container").show();

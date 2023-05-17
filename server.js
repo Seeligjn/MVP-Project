@@ -14,7 +14,10 @@ const db = new pg.Pool({
 //get request to return all contacts
 server.use(express.static("public"));
 server.get("/api/contacts", (req, res) => {
-  db.query("SELECT * FROM contacts ORDER BY first_name", []).then((result) => {
+  db.query("SELECT * FROM contacts ORDER BY first_name", []).then((error,result) => {
+    if (error) {
+      throw error;
+    }
     res.send(result.rows);
   });
 });
@@ -38,7 +41,7 @@ server.get("/api/contacts/:id", (req, res) => {
 server.use(express.json());
 server.post("/api/contacts", (req, res) => {
   const { first_name, last_name, phone_number, address } = req.body;
-  if (phone_number && phone_number.length > 15) {
+  if (phone_number && phone_number.length > 10) {
     res.status(422).send("Please choose enter a valid Phone Number.");
     return;
   }

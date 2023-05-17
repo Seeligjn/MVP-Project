@@ -31,7 +31,6 @@ h1 {
     display: flex;
     flex-direction: column;
     font-family: 'Montserrat', sans-serif;
-
 }
 
 .user-controls {
@@ -52,12 +51,6 @@ body {
     background: linear-gradient(90deg, #d53369 0%, #daae51 100%);
 
 }
-
-i {
-    display: flex;
-    flex-wrap: wrap;
-}
-
 
 ::-webkit-scrollbar {
     width: 1em;
