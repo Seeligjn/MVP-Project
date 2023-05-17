@@ -15,9 +15,6 @@ const db = new pg.Pool({
 server.use(express.static("public"));
 server.get("/api/contacts", (req, res) => {
   db.query("SELECT * FROM contacts ORDER BY first_name", []).then((error,result) => {
-    if (error) {
-      res.sendStatus(500)
-    }
     res.send(result.rows);
   });
 });
